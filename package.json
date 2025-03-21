@@ -6,11 +6,11 @@
     "wmo",
     "wis 2.0"
   ],
-  "homepage": "https://github.com/wmo-im/wis2box-ui",
+  "homepage": "https://github.com/World-Meteorological-Organization/wis2box-ui",
   "documentation": "https://docs.wis2box.wis.wmo.int",
-  "repository": "github:wmo-im/wis2box-ui",
+  "repository": "github:World-Meteorological-Organization/wis2box-ui",
   "bugs": {
-    "url": "https://github.com/wmo-im/wis2box-ui/issues",
+    "url": "https://github.com/World-Meteorological-Organization/wis2box-ui/issues",
     "email": "tomkralidis@gmail.com"
   },
   "license": "Apache-2.0",
