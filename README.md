@@ -2,7 +2,7 @@
 
 `wis2box-ui` is the user interface for the [wis2box](https://docs.wis2box.wis.wmo.int) 
 
-Please direct all issues to the [main wis2box issue tracker](https://github.com/wmo-im/wis2box/issues)
+Please direct all issues to the [main wis2box issue tracker](https://github.com/World-Meteorological-Organization/wis2box/issues)
 
 ## Environment Variables
 
@@ -46,7 +46,7 @@ To add a supported locale to wis2box-ui, create a branch of wis2box-ui and navig
 #### Example: creating an entry for German (de):
 
 ```
-git clone https://github.com/wmo-im/wis2box-ui.git
+git clone https://github.com/World-Meteorological-Organization/wis2box-ui.git
 cd ./src/locales
 cp _template.json de.json
 ```
@@ -74,7 +74,7 @@ git push origin main
 git tag -a x.y.z -m 'tagging release version x.y.z'
 git push --tags
 
-# publish release on GitHub (https://github.com/wmo-im/wis2box-ui/releases/new)
+# publish release on GitHub (https://github.com/World-Meteorological-Organization/wis2box-ui/releases/new)
 ```
 
 ### Code Conventions
