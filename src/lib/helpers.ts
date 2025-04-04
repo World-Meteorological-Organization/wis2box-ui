@@ -105,28 +105,30 @@ export function getColumnFromKey<T extends keyof Feature['properties']>(
   return result
 }
 
-// in OAF endpoints there is no way to get all the features in a collection at once
-// so we need to fetch as hits, then fetch as features using the hits as the limit
-export async function fetchAllOAFFeatures(urlWithParams: string) {
-  const hitsURL = `${urlWithParams}&${new URLSearchParams({
-    resulttype: 'hits',
-  }).toString()}`
+// get total number of OAF features from enpoint
+export async function fetchTotalFeatures(urlWithParams: string): Promise<number> {
+  const hitsURL = addParam(urlWithParams, 'resulttype', 'hits');
 
   const response = await fetchWithToken(hitsURL)
   if (response.ok) {
     const hits: ItemsResponse = await response.json()
-    const featuresURL = `${urlWithParams}&${new URLSearchParams({
-      limit: hits.numberMatched.toString(),
-    }).toString()}`
-    const featuresResponse = await fetchWithToken(featuresURL)
+
+    return hits.numberMatched;
+  } else {
+    throw new Error('Failed to fetch hits')
+  }
+}
+
+// Fetch features using the request built in DataViewer
+export async function fetchOAFFeatures(urlWithParams: string) {
+
+    const featuresResponse = await fetchWithToken(urlWithParams)
     if (featuresResponse.ok) {
       return featuresResponse
     } else {
       throw new Error('Failed to fetch features')
     }
-  } else {
-    throw new Error('Failed to fetch hits')
-  }
+
 }
 
 // Same as a normal fetch function, but overrides and adds the Authorization header from the global store
@@ -143,4 +145,29 @@ export async function fetchWithToken(
 
   // Call the native fetch with the updated headers
   return fetch(input, newInit)
+}
+
+export function isLocalhost(): boolean {
+  return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+}
+
+export function replaceHostname(url: string, newString: string): string {
+  return url.replace(/^(http:\/\/[^/]+\/).*\/collections/, `${newString}/collections`);
+}
+
+export function replaceParam(url: string, paramName: string, value: string) {
+  const urlObj = new URL(url);
+  const params = new URLSearchParams(urlObj.search);
+  params.set(paramName, value);
+
+  urlObj.search = params.toString();
+  return urlObj.toString();
+}
+
+export function addParam(url: string, paramName: string, value: string) {
+  const urlObj = new URL(url);
+  const params = new URLSearchParams(urlObj.search);
+  params.append(paramName, value);
+  urlObj.search = params.toString();
+  return urlObj.toString();
 }

@@ -3,7 +3,7 @@
 -->
 
 <template id="data-table">
-  <v-card min-height="500px" class="ma-4">
+  <v-card min-height="470px" max-height="470px" class="ma-4">
     <v-progress-linear striped indeterminate color="primary" v-if="loading" />
     <div>
       <v-container>
@@ -12,7 +12,7 @@
         </v-row>
       </v-container>
 
-      <v-table v-show="title !== ''" fixed-header height="470px">
+      <v-table v-show="title !== ''" fixed-header height="438px">
         <thead>
           <tr>
             <th class="text-center">
@@ -47,8 +47,9 @@ import { defineComponent, type PropType } from "vue";
 import { mdiDownload } from "@mdi/js";
 import { catchAndDisplayError } from "@/lib/errors";
 import type { Datastreams, Feature, ItemsResponse } from "@/lib/types";
-import { clean, fetchAllOAFFeatures, getColumnFromKey } from "@/lib/helpers";
+import { clean, getColumnFromKey } from "@/lib/helpers";
 import { t } from "@/locales/i18n";
+
 
 
 export default defineComponent({
@@ -64,15 +65,42 @@ export default defineComponent({
     selectedDatastream: {
       type: Object as PropType<Datastreams[0]>,
       required: true,
+    },
+    itemsResponse: {
+      type: Object as PropType<ItemsResponse>,
+      required: true
+    },
+    itemsResponseUrl: {
+      type: String,
+      required: true,
+    },
+    loading: {
+      type: Boolean,
+      required: true,
     }
   },
-  mounted: function () {
-    this.loadObservations();
+  computed: {
+    combinedProps() {
+      return {
+        selectedDatastream: this.selectedDatastream,
+        itemsResponse: this.itemsResponse,
+        itemsResponseUrl: this.itemsResponseUrl,
+      };
+    },
+    features() {
+      return this.itemsResponse.features
+    }
   },
   watch: {
-    selectedDatastream: function () {
-      this.loadObservations();
-    }
+    combinedProps: function () {
+      this.generateTable();
+    },
+    features: function () {
+      this.generateTable();
+    },
+  },
+  mounted: function () {
+    this.generateTable();
   },
   data() {
     return {
@@ -81,7 +109,6 @@ export default defineComponent({
         phenomenonTime: string[],
         value: number[] | string[], // value can be either categorical or numerical
       },
-      loading: false,
       title: "",
       headerOverflow: 0,
       alert_: this.alert,
@@ -135,30 +162,24 @@ export default defineComponent({
     },
     t,
     getColumnFromKey,
-    async loadObservations() {
-
-      this.loading = true;
-
+    generateTable() {
+      if (!Object.keys(this.itemsResponse).length || !this.itemsResponseUrl.length) {
+        return;
+      }
+      
       try {
-        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}`
-        console.log(url)
-        const response = await fetchAllOAFFeatures(url);
-        const data: ItemsResponse = await response.json();
-        this.plot(response.url);
+        this.plot(this.itemsResponseUrl);
         if (this.selectedDatastream.units === "CODE TABLE") {
           this.title = clean(`${this.selectedDatastream.name}`);
-          this.data.value = this.getColumnFromKey(data.features, "description") as string[];
+          this.data.value = this.getColumnFromKey(this.itemsResponse.features, "description") as string[];
         } else {
           this.title = `${clean(this.selectedDatastream.name)} (${this.selectedDatastream.units})`;
-          this.data.value = this.getColumnFromKey(data.features, "value") as number[];
+          this.data.value = this.getColumnFromKey(this.itemsResponse.features, "value") as number[];
         }
-        this.data.time = this.getColumnFromKey(data.features, "reportTime") as string[];
-        this.data.phenomenonTime = this.getColumnFromKey(data.features, "phenomenonTime") as string[];
+        this.data.time = this.getColumnFromKey(this.itemsResponse.features, "reportTime") as string[];
+        this.data.phenomenonTime = this.getColumnFromKey(this.itemsResponse.features, "phenomenonTime") as string[];
       } catch (error) {
         catchAndDisplayError(String(error));
-      } finally {
-        this.loading = false;
-        console.log("done");
       }
     },
     plot(url: string) {

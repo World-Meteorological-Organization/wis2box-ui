@@ -66,5 +66,16 @@
     "explore": "Explore",
     "mqp": "PubSub",
     "metadata_id": "Metadata Identifier"
+  },
+  "$vuetify": {
+    "pagination": {
+      "ariaLabel": {
+        "root": "Pagination Navigation",
+        "page": "Page",
+        "currentPage": "Current Page",
+        "next": "Next Page",
+        "previous": "Previous Page"
+      }
+    }
   }
 }

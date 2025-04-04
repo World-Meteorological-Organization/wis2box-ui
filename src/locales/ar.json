@@ -66,5 +66,16 @@
     "explore": "استكشاف",
     "mqp": "PubSub",
     "metadata_id": "معرّف البيانات الوصفية"
+  },
+  "$vuetify": {
+    "pagination": {
+      "ariaLabel": {
+        "root": "التنقل في الصفحات",
+        "page": "صفحة",
+        "currentPage": "الصفحة الحالية",
+        "next": "الصفحة التالية",
+        "previous": "الصفحة السابقة"
+      }
+    }
   }
 }

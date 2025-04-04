@@ -22,7 +22,7 @@
         </v-btn>
       </template>
     </v-toolbar>
-    <ChartDialog :topic="topic" :selected-station="selectedStation" v-if="showDataset && selectedStation" />
+    <ChartDialog :topic="topic" :selected-station="selectedStation" @toggleDataset="toggleDataset" v-if="showDataset && selectedStation" />
 
     <v-card flat class="text-center" v-if="!selectedStation">
       <StationList :features="features" :map="map" />
