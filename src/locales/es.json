@@ -61,6 +61,7 @@
   "datasets": {
     "topic": "Tema",
     "messages": "Mensajes",
+    "data": "Datos",
     "oafeat": "Observaciones",
     "oarec": "Metadatos",
     "map": "Mapa",
