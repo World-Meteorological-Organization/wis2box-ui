@@ -1,6 +1,6 @@
 {
   "name": "wis2box-ui",
-  "version": "1.0.0rc1",
+  "version": "1.0.0",
   "description": "wis2box-ui is the web application component of the WIS 2.0 in a box project",
   "keywords": [
     "wmo",
