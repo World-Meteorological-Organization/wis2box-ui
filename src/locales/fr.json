@@ -59,7 +59,8 @@
   },
   "datasets": {
     "topic": "Sujet",
-    "messages": "Messagerie",
+    "messages": "Messages",
+    "data": "Données",
     "oafeat": "Observations",
     "oarec": "Métadonnées",
     "map": "Carte",
