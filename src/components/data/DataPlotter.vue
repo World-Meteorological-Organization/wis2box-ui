@@ -146,7 +146,7 @@ export default defineComponent({
 
         let response
         try {
-          response = await fetchWithToken(url);
+          response = await fetchAllOAFFeatures(url);
         }
         catch (error) {
           catchAndDisplayError(String(error), undefined, response?.status);
