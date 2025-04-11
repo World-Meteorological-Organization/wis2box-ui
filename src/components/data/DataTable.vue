@@ -140,7 +140,7 @@ export default defineComponent({
       this.loading = true;
 
       try {
-        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}`
+        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}&sortby=-reportTime`
         console.log(url)
         const response = await fetchAllOAFFeatures(url);
         const data: ItemsResponse = await response.json();
