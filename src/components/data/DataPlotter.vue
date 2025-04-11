@@ -20,7 +20,7 @@ import { defineComponent, type PropType } from "vue";
 import { mdiOpenInNew } from "@mdi/js";
 import { catchAndDisplayError } from "@/lib/errors";
 import type { Trace, Datastreams, Feature, ItemsResponse } from "@/lib/types";
-import { clean, fetchWithToken, getColumnFromKey } from "@/lib/helpers";
+import { clean, fetchAllOAFFeatures, getColumnFromKey } from "@/lib/helpers";
 import { t } from "@/locales/i18n"
 
 export default defineComponent({
