@@ -66,6 +66,17 @@
     "explore": "探索",
     "mqp": "PubSub",
     "metadata_id": "元数据标识符"
+  },
+  "$vuetify": {
+    "pagination": {
+      "ariaLabel": {
+        "root": "分页导航",
+        "page": "页",
+        "currentPage": "当前页",
+        "next": "下一页",
+        "previous": "上一页"
+      }
+    }
   }
 }
   

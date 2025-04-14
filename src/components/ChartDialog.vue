@@ -9,7 +9,7 @@
       class="pa-4 scroll">
 
       <v-row justify="end">
-        <v-btn variant="text" color="pink" icon @click="open = !open">
+        <v-btn variant="text" color="pink" icon @click="handleClose">
           <v-icon icon="mdi-close"> </v-icon>
         </v-btn>
       </v-row>
@@ -25,7 +25,7 @@
 
       <v-progress-linear v-if="loading" indeterminate color="primary" />
 
-      <v-responsive height="590">
+      <v-responsive height="620">
         <DataViewer :datastreams="datastreams" :topic="topic" :selected-station="selectedStation" />
       </v-responsive>
     </v-card>
@@ -64,6 +64,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ["toggleDataset"],
   methods: {
     async fetchDatastreams() {
       this.loading = true;
@@ -101,6 +102,10 @@ export default defineComponent({
         this.loading = false;
       }
     },
+    handleClose: function() {
+      this.$emit('toggleDataset');
+      this.open = false;
+    }
   },
   async mounted() {
     await this.fetchDatastreams();

@@ -2,9 +2,9 @@
 
 <template id="data-plotter">
   <div class="data-plotter">
-    <v-card min-height="500px" class="ma-4">
+    <v-card min-height="470px" class="ma-4">
       <v-progress-linear striped indeterminate color="primary" v-if="loading" />
-      <div :style="{ visibility: !loading ? 'visible' : 'hidden' }">
+      <div>
         <v-card class="mx-auto" flat>
           <div :id="'plotly-chart-' + selectedStation.id" />
         </v-card>
@@ -20,8 +20,8 @@ import { defineComponent, type PropType } from "vue";
 import { mdiOpenInNew } from "@mdi/js";
 import { catchAndDisplayError } from "@/lib/errors";
 import type { Trace, Datastreams, Feature, ItemsResponse } from "@/lib/types";
-import { clean, fetchWithToken, getColumnFromKey } from "@/lib/helpers";
-import { t } from "@/locales/i18n"
+import { clean, getColumnFromKey } from "@/lib/helpers";
+import { t } from "@/locales/i18n";
 
 export default defineComponent({
   props: {
@@ -36,15 +36,41 @@ export default defineComponent({
     selectedDatastream: {
       type: Object as PropType<Datastreams[0]>,
       required: true,
+    },
+    itemsResponse: {
+      type: Object as PropType<ItemsResponse>,
+      required: true
+    },
+    itemsResponseUrl: {
+      type: String,
+      required: true,
+    },
+    loading: {
+      type: Boolean,
+      required: true,
     }
   },
-  mounted: function () {
-    this.loadObservations();
+  computed: {
+    combinedProps() {
+      return {
+        selectedDatastream: this.selectedDatastream,
+        itemsResponse: this.itemsResponse,
+        itemsResponseUrl: this.itemsResponseUrl,
+      };
+    },
   },
   watch: {
-    selectedDatastream: function () {
-      this.loadObservations();
-    }
+    combinedProps: function () {
+      this.generatePlot();
+    },
+    itemsResponse: {
+      handler: function () {
+        this.generatePlot();
+      }, deep: true
+    },
+  },
+  mounted: function () {
+    this.generatePlot();
   },
   data: function () {
     return {
@@ -70,7 +96,6 @@ export default defineComponent({
         name: "",
       },
       data: [] as Trace[],
-      loading: false,
       layout: {
         title: "",
         xaxis: {
@@ -112,7 +137,7 @@ export default defineComponent({
   },
   methods: {
     plot() {
-      this.loading = true;
+      this.$emit('loading', true);
       const plot = document.getElementById(
         "plotly-chart-" + this.selectedStation.id
       );
@@ -120,7 +145,7 @@ export default defineComponent({
         Plotly.purge(plot);
       }
       Plotly.newPlot(plot, this.data, this.layout, this.config);
-      this.loading = false;
+      this.$emit('loading', false);
     },
     getColumnFromKey,
     newTrace(features: Feature[], xAxis: keyof Feature["properties"], yAxis: keyof Feature["properties"]) {
@@ -138,23 +163,14 @@ export default defineComponent({
       const lastreportTime = lastFeature?.properties.reportTime;
       this.setDateLayout(lastreportTime || '');
     },
-    async loadObservations() {
+    generatePlot() {
+      if (!Object.keys(this.itemsResponse).length || !this.itemsResponseUrl.length) {
+        return;
+      }
+
       this.data = [];
-      this.loading = true;
       try {
-        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}&sortby=reportTime`;
 
-        let response
-        try {
-          response = await fetchWithToken(url);
-        }
-        catch (error) {
-          catchAndDisplayError(String(error), undefined, response?.status);
-          return;
-        }
-
-        const data: ItemsResponse = await response.json();
-        const dataURL = response.url;
         this.config.modeBarButtonsToAdd = [{
           name: t("chart.data_source"),
           icon: {
@@ -165,19 +181,17 @@ export default defineComponent({
           click: () => {
             const [start, end] = this.layout.xaxis.range;
             const timeExtent = `${new Date(start + "Z").toISOString()}/${new Date(end + "Z").toISOString()}`;
-            window.location.href = `${dataURL}&datetime=${timeExtent}`;
+            window.location.href = `${this.itemsResponseUrl}&datetime=${timeExtent}`;
           },
         }];
         const xAxis = "reportTime";
         const yAxis = "value";
-        this.newTrace(data.features, xAxis, yAxis);
+        this.newTrace(this.itemsResponse.features, xAxis, yAxis);
         this.layout.yaxis.title = this.selectedDatastream.units || '';
         this.layout.title = clean(this.selectedDatastream.name || '');
         this.plot();
       } catch (error) {
         catchAndDisplayError(String(error));
-      } finally {
-        this.loading = false;
       }
     },
     setDateLayout(reportTime: string) {

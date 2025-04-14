@@ -66,5 +66,16 @@
     "explore": "",
     "mqp": "",
     "metadata_id": ""
+  },
+  "$vuetify": {
+    "pagination": {
+      "ariaLabel": {
+        "root": "",
+        "page": "",
+        "currentPage": "",
+        "next": "",
+        "previous": ""
+      }
+    }
   }
 }
