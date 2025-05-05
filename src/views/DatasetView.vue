@@ -42,7 +42,8 @@
         <v-col>
           <span>
             <strong>{{ $t("datasets.topic") + ": " }}</strong>
-            <code>{{ dataset.properties['wmo:topicHierarchy'] }}</code>
+            <code v-if="dataset.properties['wmo:topicHierarchy']">{{ dataset.properties['wmo:topicHierarchy'] }}</code>
+            <code v-else>---</code>
             <br>
             <strong>{{ $t("datasets.metadata_id") + ": " }}</strong>
             <code>{{ dataset.properties.id}}</code>
@@ -117,7 +118,13 @@ export default defineComponent({
 
         for (const feature of data.features) {
 
-          const hasSynop = feature.properties["wmo:topicHierarchy"].includes("surface-based-observations/synop");
+          // if "wmo:topicHierarchy" not is available in the properties hasSynop should be false
+          let hasSynop = false;
+          let hasTopic = false;
+          if (feature.properties["wmo:topicHierarchy"]) {
+            hasTopic = true;
+            hasSynop = feature.properties["wmo:topicHierarchy"].includes("surface-based-observations/synop");
+          }
           const uiLinks = [];
 
           if (hasSynop) {
@@ -146,17 +153,26 @@ export default defineComponent({
                 msg: "oafeat",
                 icon: "mdi-database-search",
               });
+            } else if (link.rel === "data") {
+              uiLinks.push({
+                href: link.href,
+                target: undefined,
+                type: "data",
+                msg: "data",
+                icon: "mdi-file-document"
+              });
             }
           }
 
-          uiLinks.push({
-            target: undefined,
-            href: `${window.VUE_APP_OAPI}/collections/messages/items?metadata_id=${feature.id}`,
-            type: "Info",
-            msg: "messages",
-            icon: "mdi-message-text-outline",
-          });
-
+          if(hasTopic) {
+            uiLinks.push({
+              target: undefined,
+              href: `${window.VUE_APP_OAPI}/collections/messages/items?metadata_id=${feature.id}`,
+              type: "Info",
+              msg: "messages",
+              icon: "mdi-message-text-outline",
+            });
+          }
           const bbox = feature.geometry.coordinates[0].flat(2);
 
           this.datasets.push({
