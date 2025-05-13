@@ -1,77 +1,75 @@
 <template id="datasets">
-  <v-card flat>
-    <div class="d-flex justify-center mt-1">
-      <v-progress-linear v-if="loading" indeterminate color="primary" />
-    </div>
+  <v-progress-linear v-if="loading" indeterminate color="primary" />
 
-    <v-card class="pa-2">
+  <v-card flat v-if="!loading" class="pa-2">
 
-      <v-alert class="py-2" border="start" variant="text" color="#014e9e">
-        <h2>{{ $t("messages.welcome") }}</h2>
-      </v-alert>
+    <v-alert class="py-2 mb-2 text-center" border="start" variant="text" color="#014e9e">
+      <h2>{{ $t("messages.welcome") }}</h2>
+    </v-alert>
 
-      <v-row v-for="(dataset, index) in datasets" :key="index">
-        <v-col sm="12" md="3">
-          <v-container>
-            <v-row justify="center" fill-height>
-              <template v-if="dataset.hasSynop">
-                <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)" @keydown.enter="loadMap(dataset.id)" aria-label="Dataset map">
-                  <v-overlay open-on-hover contained activator="parent" class="align-center justify-center">
-                    <v-btn flat>
-                      {{ $t("datasets.map") }}
-                    </v-btn>
-                  </v-overlay>
-                  <dataset-map :dataset="dataset" />
-                </v-card>
-              </template>
-              <template v-else>
-                <!-- TODO we could call out that there are no observations;
+    <v-row v-for="(dataset, index) in datasets" :key="index">
+      <v-col sm="12" md="3">
+        <v-container>
+          <v-row justify="center" fill-height>
+            <template v-if="dataset.hasSynop">
+              <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)" @keydown.enter="loadMap(dataset.id)"
+                aria-label="Dataset map"> <v-overlay open-on-hover contained activator="parent"
+                  class="align-center justify-center">
+                  <v-btn flat>
+                    {{ $t("datasets.map") }}
+                  </v-btn>
+                </v-overlay>
+                <dataset-map :dataset="dataset" />
+              </v-card>
+            </template>
+            <template v-else>
+              <!-- TODO we could call out that there are no observations;
                      However, this could be done by using either feature.properties["wmo:topicHierarchy"].includes("surface-based-observations"); 
                      or the length of the features inside the collection. Would need to check both and it may be confusing the user
                      that there are different ways to check
                   -->
-                <!-- <i>{{ $t("messages.no_observations_in_collection") }}</i> -->
-                <v-card class="pa-0 ma-0">
-                  <dataset-map :dataset="dataset" />
-                </v-card>
-              </template>
-            </v-row>
-          </v-container>
+              <!-- <i>{{ $t("messages.no_observations_in_collection") }}</i> -->
+              <v-card class="pa-0 ma-0">
+                <dataset-map :dataset="dataset" />
+              </v-card>
+            </template>
+          </v-row>
+        </v-container>
+      </v-col>
+      <v-col sm="12" md="9" class="text-center">
+        <v-col class="pb-0">
+          <h2>{{ dataset.properties.title }}</h2>
         </v-col>
-        <v-col sm="12" md="9" class="text-center">
-          <v-col class="pb-0">
-            <h2>{{ dataset.properties.title }}</h2>
-          </v-col>
-          <v-col>
-            <span>
-              <strong>{{ $t("datasets.topic") + ": " }}</strong>
-              <code>{{ dataset.properties['wmo:topicHierarchy'] }}</code>
-              <br>
-              <strong>{{ $t("datasets.metadata_id") + ": " }}</strong>
-              <code>{{ dataset.properties.id}}</code>
-            </span>
-          </v-col>
-          <v-col>
-            <v-btn-group v-show="$vuetify.display.mdAndUp" variant="outlined" divided>
-              <v-btn v-for="(link, linkIndex) in dataset.uiLinks" :key="linkIndex" :title="link.type" :href="link.href"
-                :to="link.target" :target="`_window_${link.type}`">
-                {{ $t(`datasets.${link.msg}`) }}
-                <v-icon end :icon="link.icon" />
-              </v-btn>
-            </v-btn-group>
-            <v-row v-show="$vuetify.display.smAndDown" v-for="(link, linkIndex) in dataset.uiLinks" :key="linkIndex"
-              justify="center" class="my-1">
-              <v-btn block variant="outlined" :title="link.type" :href="link.href" :to="link.target"
-                :target="`_window_${link.type}`">
-                {{ $t(`datasets.${link.msg}`) }}
-                <v-icon end :icon="link.icon" />
-              </v-btn>
-            </v-row>
-          </v-col>
+        <v-col>
+          <span>
+            <strong>{{ $t("datasets.topic") + ": " }}</strong>
+            <code>{{ dataset.properties['wmo:topicHierarchy'] }}</code>
+            <br>
+            <strong>{{ $t("datasets.metadata_id") + ": " }}</strong>
+            <code>{{ dataset.properties.id}}</code>
+          </span>
         </v-col>
-        <v-divider v-if="index + 1 < datasets.length" />
-      </v-row>
-    </v-card>
+        <v-col>
+          <v-btn-group v-show="$vuetify.display.mdAndUp" variant="outlined" divided>
+            <v-btn v-for="(link, linkIndex) in dataset.uiLinks" :key="linkIndex" :title="link.type" :href="link.href"
+              :to="link.target" :target="`_window_${link.type}`">
+              {{ $t(`datasets.${link.msg}`) }}
+              <v-icon end :icon="link.icon" />
+            </v-btn>
+          </v-btn-group>
+          <v-row v-show="$vuetify.display.smAndDown" v-for="(link, linkIndex) in dataset.uiLinks" :key="linkIndex"
+            justify="center" class="my-1">
+            <v-btn block variant="outlined" :title="link.type" :href="link.href" :to="link.target"
+              :target="`_window_${link.type}`">
+              {{ $t(`datasets.${link.msg}`) }}
+              <v-icon end :icon="link.icon" />
+            </v-btn>
+          </v-row>
+        </v-col>
+      </v-col>
+      <v-divider v-if="index + 1 < datasets.length" />
+    </v-row>
+  </v-card>
   </v-card>
 </template>
 

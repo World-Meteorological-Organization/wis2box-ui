@@ -1,2 +1,5 @@
 # not fixed in nginx, does not appear to be a security issue
 CVE-2023-49462
+CVE-2024-55549
+CVE-2025-24855
+CVE-2024-56406

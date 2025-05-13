@@ -3,14 +3,14 @@
 -->
 
 <template id="station-info">
-  <v-card flat height="60vh" class="scroll">
+  <v-card flat :height="$vuetify.display.height - 232" class="scroll">
     <v-toolbar>
-      <v-toolbar-title>
+      <v-toolbar-title :class="selectedStation?.properties.name ? 'mx-auto' : 'ml-n12'">
         {{ selectedStation?.properties.name || $t("chart.station") }}
       </v-toolbar-title>
 
-      <template v-slot:prepend v-if="selectedStation">
-        <v-btn icon @click="store.clearSelectedStation">
+      <template v-slot:prepend>
+        <v-btn icon @click="selectedStation ? store.clearSelectedStation() : $router.push('/')">
           <v-icon icon="mdi-arrow-left"></v-icon>
         </v-btn>
       </template>
@@ -68,6 +68,11 @@ export default defineComponent({
     toggleDataset() {
       this.showDataset = !this.showDataset;
     }
+  },
+  computed: {
+    smAndDown() {
+      return this.$vuetify.display.smAndDown;
+    },
   },
 });
 </script>

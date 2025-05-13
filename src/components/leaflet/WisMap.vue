@@ -6,8 +6,8 @@
         <StationInfo :topic="topic" :features="features" :map="map" class="ma-1" />
       </v-col>
       <v-col :cols="smAndDown ? 12 : 8">
-        <v-card class="ma-1">
-          <l-map ref="wisMap" :zoom="zoom" :center="center" :maxZoom="16" :minZoom="2" style="height: 60vh"
+        <v-card class="ma-1" :height="$vuetify.display.height - 232">
+          <l-map ref="wisMap" :zoom="zoom" :center="center" :maxZoom="16" :minZoom="2"
             @ready="onReady()">
             <template v-if="!loading && map && features">
               <WisStation :features="features" :map="map" />

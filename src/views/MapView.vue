@@ -1,6 +1,6 @@
 <template>
   <v-progress-linear v-if="!featuresReady" striped indeterminate color="primary" />
-  <v-card flat class="pa-2">
+  <v-card flat class="pa-2" width="100%">
 
     <div v-show="!featuresReady" style="height: 10px;">
           <!-- For some reason, the v-progress-linear will not show up

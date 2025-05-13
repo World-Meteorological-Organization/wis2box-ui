@@ -12,7 +12,7 @@
         </v-row>
       </v-container>
 
-      <v-table v-show="title !== ''" fixed-header height="500px">
+      <v-table v-show="title !== ''" fixed-header height="470px">
         <thead>
           <tr>
             <th class="text-center">
@@ -140,7 +140,7 @@ export default defineComponent({
       this.loading = true;
 
       try {
-        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}`
+        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}&sortby=-reportTime`
         console.log(url)
         const response = await fetchAllOAFFeatures(url);
         const data: ItemsResponse = await response.json();

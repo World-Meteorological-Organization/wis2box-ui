@@ -1,10 +1,22 @@
 <template id="app-footer">
-  <v-footer :flat="true" :height="90" :style="{ backgroundColor: customFooterColor as string }">
+  <v-app-bar flat height="90" class="pa-0 ma-0" location="bottom">
+    <template v-slot:image>
+      <!-- in order to have no padding on the top image
+        you need to set padding and margin to be 0 and then 
+        set fluid to true specifically in that order. Appears to
+        be a vuetify quirk 
+      -->
+      <v-container class="pa-0 ma-0" fluid>
+        <v-img v-if="!disableSeparator" :src="footerImage" :lazy-src="footerImage" />
+        <div 
+          v-if="customFooterColor" 
+          :style="{ backgroundColor: customFooterColor, height: '110px' }">
+        </div>
+      </v-container>
+    </template>
+
     <v-row justify="center">
-      <v-col cols="12">
-        <v-img v-if="footerImage && !disableSeparator" cover :src="footerImage" :lazy-src="footerImage" />
-      </v-col>
-      <v-col class="primary text-center pt-0" cols="12">
+      <v-col class="primary text-center" cols="12">
         <p :style="{ color: contrastColor }">
           {{ $t("footer.powered_by") }}
           <a :title="name" :href="homepage" :style="{ color: contrastColor }">
@@ -18,7 +30,7 @@
         </p>
       </v-col>
     </v-row>
-  </v-footer>
+  </v-app-bar>
 </template>
 
 <script lang="ts">
