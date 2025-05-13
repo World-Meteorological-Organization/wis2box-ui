@@ -13,8 +13,8 @@
           <v-row justify="center" fill-height>
             <template v-if="dataset.hasSynop">
               <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)" @keydown.enter="loadMap(dataset.id)"
-                aria-label="Dataset map"> <v-overlay open-on-hover contained activator="parent"
-                  class="align-center justify-center">
+                aria-label="Dataset map">
+                <v-overlay open-on-hover contained activator="parent" class="align-center justify-center">
                   <v-btn flat>
                     {{ $t("datasets.map") }}
                   </v-btn>
@@ -46,10 +46,10 @@
             <code>{{ dataset.properties['wmo:topicHierarchy'] }}</code>
             <br>
             <strong>{{ $t("datasets.metadata_id") + ": " }}</strong>
-            <code>{{ dataset.properties.id}}</code>
+            <code>{{ dataset.properties.id }}</code>
           </span>
         </v-col>
-        <v-col>
+        <v-col class="pt-0">
           <v-btn-group v-show="$vuetify.display.mdAndUp" variant="outlined" divided>
             <v-btn v-for="(link, linkIndex) in dataset.uiLinks" :key="linkIndex" :title="link.type" :href="link.href"
               :to="link.target" :target="`_window_${link.type}`">
@@ -69,7 +69,6 @@
       </v-col>
       <v-divider v-if="index + 1 < datasets.length" />
     </v-row>
-  </v-card>
   </v-card>
 </template>
 
