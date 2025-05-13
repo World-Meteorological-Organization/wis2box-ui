@@ -1,7 +1,7 @@
 <template id="datasets">
   <v-progress-linear v-if="loading" indeterminate color="primary" />
 
-    <v-card flat v-if="!loading" class="pa-2">
+  <v-card flat v-if="!loading" class="pa-2">
 
     <v-alert class="py-2 mb-2 text-center" border="start" variant="text" color="#014e9e">
       <h2>{{ $t("messages.welcome") }}</h2>
@@ -12,7 +12,8 @@
         <v-container>
           <v-row justify="center" fill-height>
             <template v-if="dataset.hasSynop">
-              <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)">
+              <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)" @keydown.enter="loadMap(dataset.id)"
+                aria-label="Dataset map">
                 <v-overlay open-on-hover contained activator="parent" class="align-center justify-center">
                   <v-btn flat>
                     {{ $t("datasets.map") }}
@@ -23,10 +24,10 @@
             </template>
             <template v-else>
               <!-- TODO we could call out that there are no observations;
-                    However, this could be done by using either feature.properties["wmo:topicHierarchy"].includes("surface-based-observations"); 
-                    or the length of the features inside the collection. Would need to check both and it may be confusing the user
-                    that there are different ways to check
-                -->
+                     However, this could be done by using either feature.properties["wmo:topicHierarchy"].includes("surface-based-observations"); 
+                     or the length of the features inside the collection. Would need to check both and it may be confusing the user
+                     that there are different ways to check
+                  -->
               <!-- <i>{{ $t("messages.no_observations_in_collection") }}</i> -->
               <v-card class="pa-0 ma-0">
                 <dataset-map :dataset="dataset" />
@@ -45,7 +46,7 @@
             <code>{{ dataset.properties['wmo:topicHierarchy'] }}</code>
             <br>
             <strong>{{ $t("datasets.metadata_id") + ": " }}</strong>
-            <code>{{ dataset.properties.id}}</code>
+            <code>{{ dataset.properties.id }}</code>
           </span>
         </v-col>
         <v-col class="pt-0">
