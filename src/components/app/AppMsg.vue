@@ -1,6 +1,15 @@
 <template id="app-msg">
   <v-overlay v-model="snackbar" class="align-center justify-center">
-    <v-card flat width="100%" max-width="1130" class="text-center">
+    <v-card 
+      flat 
+      width="100%" 
+      max-width="1130" 
+      class="text-center" 
+      aria-live="assertive" 
+      aria-atomic="true" 
+      role="alertdialog"
+      v-if="error.msg"
+    >
       <v-card-text>
         <template v-if="error.msg">
           <template v-for="(line, index) in splitMessage" :key="index">
