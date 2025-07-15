@@ -153,13 +153,21 @@ export default defineComponent({
                 msg: "oafeat",
                 icon: "mdi-database-search",
               });
-            } else if (link.rel === "data") {
+            } else if (link.rel === "data" || link.rel === "archives") {
+              uiLinks.push({
+              href: link.href,
+              target: undefined,
+              type: "data-link",
+              msg: "data-link",
+              icon: "mdi-file-document"
+              });
+            } else if (link.rel === "license") {
               uiLinks.push({
                 href: link.href,
                 target: undefined,
-                type: "data",
-                msg: "data",
-                icon: "mdi-file-document"
+                type: "license",
+                msg: "license",
+                icon: "mdi-file-certificate"
               });
             }
           }

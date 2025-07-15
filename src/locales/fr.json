@@ -6,6 +6,7 @@
     "datasets": "Ensemble de données ",
     "services": "Services de données",
     "data": "Données",
+    "license": "Licence",
     "documentation": "Documentation"
   },
   "util": {
@@ -61,6 +62,7 @@
     "topic": "Sujet",
     "messages": "Messages",
     "data": "Données",
+    "license": "Licence",
     "oafeat": "Observations",
     "oarec": "Métadonnées",
     "map": "Carte",
