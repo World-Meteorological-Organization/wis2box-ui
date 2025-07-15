@@ -5,7 +5,7 @@
     "home": "",
     "datasets": "",
     "services": "",
-    "data": "",
+    "external-data-link": "",
     "license": "",
     "documentation": ""
   },
@@ -61,7 +61,7 @@
   "datasets": {
     "topic": "",
     "messages": "",
-    "data": "data",
+    "external-data-link": "external-data-link",
     "license": "license",
     "oafeat": "",
     "oarec": "",

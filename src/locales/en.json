@@ -5,7 +5,7 @@
     "home": "Home",
     "datasets": "Datasets",
     "services": "Services",
-    "data": "Data",
+    "external-data-link": "External URL to data",
     "license": "License",
     "documentation": "Documentation"
   },
@@ -61,7 +61,7 @@
   "datasets": {
     "topic": "Topic",
     "messages": "Messages",
-    "data": "Data",
+    "external-data-link": "External URL to data",
     "license": "License",
     "oafeat": "Observations",
     "oarec": "Metadata",

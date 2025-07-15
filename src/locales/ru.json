@@ -5,7 +5,7 @@
     "home": "Главная",
     "datasets": "Наборы данных",
     "services": "Сервисы",
-    "data": "Данные",
+    "external-data-link": "Внешний URL для данных",
     "license": "Лицензия",
     "documentation": "Документация"
   },
@@ -61,7 +61,7 @@
   "datasets": {
     "topic": "Тема",
     "messages": "Сообщения",
-    "data": "Данные",
+    "external-data-link": "Внешний URL для данных",
     "license": "Лицензия",
     "oafeat": "Наблюдения",
     "oarec": "Метаданные",

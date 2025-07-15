@@ -157,8 +157,8 @@ export default defineComponent({
               uiLinks.push({
               href: link.href,
               target: undefined,
-              type: "data-link",
-              msg: "data-link",
+              type: "external-data-link",
+              msg: "external-data-link",
               icon: "mdi-file-document"
               });
             } else if (link.rel === "license") {

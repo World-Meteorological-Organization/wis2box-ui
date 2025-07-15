@@ -5,7 +5,7 @@
     "home": "الرئيسية",
     "datasets": "مجموعات البيانات",
     "services": "الخدمات",
-    "data": "البيانات",
+    "external-data-link": "رابط خارجي للبيانات",
     "license": "الرخصة",
     "documentation": "التوثيق"
   },
@@ -61,7 +61,7 @@
   "datasets": {
     "topic": "الموضوع",
     "messages": "رسائل",
-    "data": "البيانات",
+    "external-data-link": "رابط خارجي للبيانات",
     "license": "الرخصة",
     "oafeat": "الملاحظات",
     "oarec": "البيانات الوصفية",
