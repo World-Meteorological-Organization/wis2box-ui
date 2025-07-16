@@ -167,7 +167,7 @@ export default defineComponent({
                 target: undefined,
                 type: "license",
                 msg: "license",
-                icon: "mdi-file-certificate"
+                icon: "mdi-license"
               });
             }
           }
