@@ -153,7 +153,8 @@ export default defineComponent({
                 msg: "oafeat",
                 icon: "mdi-database-search",
               });
-            } else if (link.rel === "data" || link.rel === "archives" || link.rel === "service-desc") {
+            } else if (link.rel === "data" || link.rel === "archives" || 
+                       link.rel === "service-desc" || link.rel === "data") {
               uiLinks.push({
                 href: link.href,
                 target: undefined,
