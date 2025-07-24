@@ -61,8 +61,8 @@
   "datasets": {
     "topic": "",
     "messages": "",
-    "external-data-link": "external-data-link",
-    "license": "license",
+    "external-data-link": "",
+    "license": "",
     "oafeat": "",
     "oarec": "",
     "map": "",
