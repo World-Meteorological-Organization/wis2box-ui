@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { MetadataResponse } from "../src/lib/types";
+import type { MetadataResponse } from "../src/lib/types";
 
 test("should display welcome text on the front page", async ({ page }) => {
   await page.goto("http://localhost:5173"); 
