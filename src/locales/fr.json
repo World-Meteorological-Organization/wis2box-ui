@@ -6,6 +6,8 @@
     "datasets": "Ensemble de données ",
     "services": "Services de données",
     "data": "Données",
+    "external-data-link": "Lien externe vers les données",
+    "license": "Licence",
     "documentation": "Documentation"
   },
   "util": {
@@ -59,7 +61,9 @@
   },
   "datasets": {
     "topic": "Sujet",
-    "messages": "Messagerie",
+    "messages": "Messages",
+    "external-data-link": "Lien externe vers les données",
+    "license": "Licence",
     "oafeat": "Observations",
     "oarec": "Métadonnées",
     "map": "Carte",

@@ -6,6 +6,8 @@
     "datasets": "数据集",
     "services": "服务",
     "data": "数据",
+    "external-data-link": "外部数据链接",
+    "license": "许可",
     "documentation": "文档"
   },
   "util": {
@@ -60,6 +62,8 @@
   "datasets": {
     "topic": "主题",
     "messages": "消息",
+    "external-data-link": "外部数据链接",
+    "license": "许可",
     "oafeat": "观测",
     "oarec": "发现元数据",
     "map": "地图",

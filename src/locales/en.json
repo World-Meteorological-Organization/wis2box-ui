@@ -6,6 +6,8 @@
     "datasets": "Datasets",
     "services": "Services",
     "data": "Data",
+    "external-data-link": "External URL to data",
+    "license": "License",
     "documentation": "Documentation"
   },
   "util": {
@@ -60,6 +62,8 @@
   "datasets": {
     "topic": "Topic",
     "messages": "Messages",
+    "external-data-link": "External URL to data",
+    "license": "License",
     "oafeat": "Observations",
     "oarec": "Metadata",
     "map": "Map",

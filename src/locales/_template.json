@@ -6,6 +6,8 @@
     "datasets": "",
     "services": "",
     "data": "",
+    "external-data-link": "",
+    "license": "",
     "documentation": ""
   },
   "util": {
@@ -60,6 +62,8 @@
   "datasets": {
     "topic": "",
     "messages": "",
+    "external-data-link": "",
+    "license": "",
     "oafeat": "",
     "oarec": "",
     "map": "",

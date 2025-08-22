@@ -6,6 +6,8 @@
     "datasets": "Наборы данных",
     "services": "Сервисы",
     "data": "Данные",
+    "external-data-link": "Внешний URL для данных",
+    "license": "Лицензия",
     "documentation": "Документация"
   },
   "util": {
@@ -60,6 +62,8 @@
   "datasets": {
     "topic": "Тема",
     "messages": "Сообщения",
+    "external-data-link": "Внешний URL для данных",
+    "license": "Лицензия",
     "oafeat": "Наблюдения",
     "oarec": "Метаданные",
     "map": "Карта",
