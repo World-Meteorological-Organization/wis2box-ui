@@ -31,7 +31,9 @@
     "from": "",
     "no_of_observations": "",
     "does_not_exist": "",
-    "no_discovery_datasets": ""
+    "no_discovery_datasets": "",
+    "no_messages": "",
+    "latest": ""
   },
   "station": {
     "map": "",

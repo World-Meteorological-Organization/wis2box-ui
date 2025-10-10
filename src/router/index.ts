@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Datasets from '@/views/DatasetView.vue'
 import Services from '@/views/ServiceView.vue'
-import MapView from '@/views/MapView.vue'
+import SynopMapView from '@/views/SynopMapView.vue'
 import ChartDialog from '@/components/ChartDialog.vue'
+import TempChartDialog from '@/components/TempChartDialog.vue'
+import TempMapView from '@/views/TempMapView.vue'
 
 const Authorize = {
   template: "<div>{{ $t('messages.authorize') }}</div>",
@@ -12,14 +14,26 @@ const routes = [
   {
     path: '/fixed-land-station-map/:topic',
     props: true,
-    name: 'Topic Map',
-    component: MapView,
+    name: 'Synop Map',
+    component: SynopMapView,
   },
   {
     path: '/fixed-land-station-map/:topic/data',
     props: true,
-    name: 'Topic Data',
+    name: 'Synop Data',
     component: ChartDialog,
+  },
+    {
+    path: '/fixed-upper-air-map/:topic',
+    props: true,
+    name: 'Temp Map',
+    component: TempMapView,
+  },
+  {
+    path: '/fixed-upper-air-map/:topic/data',
+    props: true,
+    name: 'Temp Data',
+    component: TempChartDialog,
   },
   {
     path: '/',

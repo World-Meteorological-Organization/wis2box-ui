@@ -10,8 +10,9 @@ export enum LegendColors {
 interface Links {
   type: string
   rel: string
-  title: string
+  title?: string
   href: string
+  length?: number
 }
 
 // Trace represents data that is used for plotting the history, plotting the datastream as timeseries
@@ -63,6 +64,10 @@ export interface Feature {
     units?: string
     value?: number
     wigos_station_identifier?: string
+
+    // Message GeoJSON
+    datetime?: string
+    pubtime?: string
   }
   links: Links[]
 }

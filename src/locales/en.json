@@ -31,7 +31,9 @@
     "from": "from",
     "no_of_observations": "Observations from the past 24 hours",
     "does_not_exist": "Page not found",
-    "no_discovery_datasets": "Discovery Metadata contains no datasets"
+    "no_discovery_datasets": "Discovery Metadata contains no datasets",
+    "no_messages": "No messages found",
+    "latest": "Most recent data"
   },
   "station": {
     "map": "Station map",
@@ -52,7 +54,8 @@
     "observed_property": "Observed Property",
     "station": "Station",
     "data_source": "Data source",
-    "download": "Download"
+    "download": "Download",
+    "datetime": "Date/Time"
   },
   "table": {
     "table": "Table",

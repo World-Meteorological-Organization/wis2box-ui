@@ -8,14 +8,14 @@
     </div>
 
     <div v-if="features">
-      <WisMap :topic="topic" :features="features" v-if="featuresReady" />
+      <SynopWisMap :topic="topic" :features="features" v-if="featuresReady" />
     </div>
   </v-card>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import WisMap from "@/components/leaflet/WisMap.vue";
+import SynopWisMap from "@/components/leaflet/SynopWisMap.vue";
 import type { ItemsResponse, ProcessResponse } from "@/lib/types";
 import { catchAndDisplayError } from "@/lib/errors";
 import { fetchWithToken } from "@/lib/helpers";
@@ -23,7 +23,7 @@ import { t } from "@/locales/i18n"
 
 export default defineComponent({
   components: {
-    WisMap,
+    SynopWisMap,
   },
   props: {
     topic: {

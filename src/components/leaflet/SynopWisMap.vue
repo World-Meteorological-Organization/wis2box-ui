@@ -3,14 +3,14 @@
   <div class="text-center">
     <v-row justify="center" fill-height no-gutters>
       <v-col :cols="smAndDown ? 12 : 4" :order="smAndDown ? 'last' : 'start'" v-if="map !== undefined">
-        <StationInfo :topic="topic" :features="features" :map="map" class="ma-1" />
+        <SynopStationInfo :topic="topic" :features="features" :map="map" class="ma-1" />
       </v-col>
       <v-col :cols="smAndDown ? 12 : 8">
         <v-card class="ma-1" :height="$vuetify.display.height - 232">
           <l-map ref="wisMap" :zoom="zoom" :center="center" :maxZoom="16" :minZoom="2"
             @ready="onReady()">
             <template v-if="!loading && map && features">
-              <WisStation :features="features" :map="map" />
+              <SynopStation :features="features" :map="map" />
             </template>
             <l-tile-layer :url="url" :attribution="attribution" />
             <l-control position="bottomleft">
@@ -38,8 +38,8 @@ import { type PropType } from "vue";
 import "leaflet/dist/leaflet.css";
 import { geoJSON, type Map } from "leaflet";
 import { LControl, LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
-import WisStation from "../station/WisStation.vue";
-import StationInfo from "../station/StationInfo.vue";
+import SynopStation from "../station/SynopStation.vue";
+import SynopStationInfo from "../station/SynopStationInfo.vue";
 import { LegendColors, type ItemsResponse } from "@/lib/types";
 import { catchAndDisplayError } from "@/lib/errors";
 import {t } from "@/locales/i18n"
@@ -49,8 +49,8 @@ export default defineComponent({
     LControl,
     LMap,
     LTileLayer,
-    WisStation,
-    StationInfo,
+    SynopStation,
+    SynopStationInfo,
   },
   data() {
     return {
