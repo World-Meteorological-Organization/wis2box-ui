@@ -30,6 +30,7 @@
     "how_to_link_station": "Asocie las estaciones con este conjunto de datos/tema para ver sus datos mostrados en el mapa.",
     "from": "desde",
     "no_of_observations": "Observaciones de las últimas 24 horas",
+    "no_of_files_published": "Archivos publicados en las últimas 24 horas",
     "does_not_exist": "Página no encontrada",
     "no_discovery_datasets": "Los metadatos de descubrimiento no contienen conjuntos de datos",
     "no_messages": "No se encontraron mensajes",
