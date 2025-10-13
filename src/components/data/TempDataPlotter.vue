@@ -55,7 +55,6 @@ export default defineComponent({
   methods: {
     async loadChart() {
       // load data from the provided URL
-      let url: string = "";
       this.loading = true;
       try {
           console.log("Decoding BUFR data from URL:", this.data_url);
