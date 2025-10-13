@@ -55,8 +55,7 @@
     "observed_property": "Observed Property",
     "station": "Station",
     "data_source": "Data source",
-    "download": "Download",
-    "datetime": "Date/Time"
+    "download": "Download"
   },
   "table": {
     "table": "Table",
