@@ -62,7 +62,7 @@ export default defineComponent({
     }
   },
   methods: {
-    getLatLon(geometry: any) {
+    getLatLon(geometry: Feature["geometry"]) {
       if (geometry && geometry.type === "Point" && Array.isArray(geometry.coordinates)) {
         const [lon, lat] = geometry.coordinates;
         return `${lat.toFixed(4)},${lon.toFixed(4)}`;

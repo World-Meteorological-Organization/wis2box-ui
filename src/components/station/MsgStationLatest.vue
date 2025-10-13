@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { getNameTime, clean, hasLinks, fetchWithToken } from "@/lib/helpers.js";
-import type { ItemsResponse, Feature } from "@/lib/types";
+import type { ItemsResponse, Feature, Link } from "@/lib/types";
 import { catchAndDisplayError } from "@/lib/errors";
 import { t } from "@/locales/i18n"
 
@@ -95,7 +95,7 @@ export default defineComponent({
           this.latest_datetime = latest.properties.datetime || null;
           this.latest_pubtime = latest.properties.pubtime || null;
           // get the first link with rel="canonical" or rel="update"
-          const link = latest.links.find((l: any) =>
+          const link = latest.links.find((l: Link) =>
             l.rel === "canonical" || l.rel === "update"
           );
           if (link) {

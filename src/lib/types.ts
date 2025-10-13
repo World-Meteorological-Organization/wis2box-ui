@@ -72,6 +72,15 @@ export interface Feature {
   links: Links[]
 }
 
+// Represent the Link object from pygeoapi
+export interface Link {
+  href: string
+  rel: string
+  type: string
+  title?: string
+  length?: number
+}
+
 // Represents the JSON response from the OAFeat endpoint ${oapi}/collections/${wmo-urn}/items
 export interface ItemsResponse {
   type: 'FeatureCollection'

@@ -36,7 +36,7 @@
 
 import TempDataPlotter from "./TempDataPlotter.vue";
 import { defineComponent, type PropType } from "vue";
-import type { CollectionsResponse, Feature } from "@/lib/types";
+import type { CollectionsResponse, Feature, Link } from "@/lib/types";
 import { useGlobalStateStore } from "@/stores/global";
 import { fetchWithToken } from "@/lib/helpers";
 
@@ -97,7 +97,7 @@ export default defineComponent({
   methods: {
     file_size(message: Feature) {
       // get the first link with rel="canonical" or rel="update"
-      const link = message.links.find((l: any) =>
+      const link = message.links.find((l: Link) =>
         l.rel === "canonical" || l.rel === "update"
       );
       if (link) {

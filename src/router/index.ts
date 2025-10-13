@@ -3,7 +3,6 @@ import Datasets from '@/views/DatasetView.vue'
 import Services from '@/views/ServiceView.vue'
 import SynopMapView from '@/views/SynopMapView.vue'
 import ChartDialog from '@/components/ChartDialog.vue'
-import TempChartDialog from '@/components/TempChartDialog.vue'
 import TempMapView from '@/views/TempMapView.vue'
 
 const Authorize = {
