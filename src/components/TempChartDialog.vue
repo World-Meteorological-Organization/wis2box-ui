@@ -25,7 +25,7 @@ data for the selected datatime
       <v-progress-linear v-if="loading" indeterminate color="primary" />
 
       <v-responsive height="720">
-        <TempDataViewer :topic="topic" :selected-station="selectedStation" :messages="messages" />
+        <TempDataViewer :metadata_id="metadata_id" :selected-station="selectedStation" :messages="messages" />
       </v-responsive>
     </v-card>
   </v-overlay>
@@ -52,7 +52,7 @@ export default defineComponent({
     };
   },
   props: {
-    topic: {
+    metadata_id: {
       type: String,
       required: true
     },
@@ -74,8 +74,8 @@ export default defineComponent({
       this.loading = true;
       try {
         const url = `${window.VUE_APP_OAPI}/collections/messages/items?` + new URLSearchParams({
+          q: this.metadata_id.replace("urn:wmo:md:", ""),
           wigos_station_identifier: this.selectedStation.id,
-          metadata_id: this.topic,
           limit: "20",
           sortby: "-datetime"
         });

@@ -6,8 +6,8 @@
       <v-progress-linear striped indeterminate color="primary" v-if="loading" />
       <div v-if="loading">Please wait, decoding BUFR data...</div>
       <div :style="{ visibility: !loading ? 'visible' : 'hidden' }">
-        <v-card class="mx-auto" flat>
-          <div :id="'temp-chart-' + selectedStation.id" />
+        <v-card class="mx-auto" flat >
+          <div :id="'temp-chart-' + selectedStation.id" style="width: 502px;"/>
         </v-card>
       </div>
     </v-card>
@@ -39,6 +39,13 @@ export default defineComponent({
   },
   watch: {
     data_url: function () {
+      if (!this.data_url) {
+        const container = document.getElementById("temp-chart-" + this.selectedStation.id);
+        if (container) {
+          container.innerHTML = "";
+        }
+        return;
+      }
       this.loadChart();
     }
   },
@@ -75,10 +82,10 @@ export default defineComponent({
             const img = document.createElement("img");
             img.src = "data:image/png;base64," + data.base64_png;
             const container = document.getElementById("temp-chart-" + this.selectedStation.id);
-              if (container) {
-                  container.innerHTML = "";
-                  container.appendChild(img);
-              }   
+            if (container) {
+                container.innerHTML = "";
+                container.appendChild(img);
+            }   
           } else {
             throw new Error("No attribute base64_png in response");
           }

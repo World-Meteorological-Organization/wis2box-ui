@@ -16,13 +16,13 @@
       </template>
 
     </v-toolbar>
-    <TempChartDialog :topic="topic" :selected-station="selectedStation" v-if="showDataset && selectedStation" />
+    <TempChartDialog :metadata_id="metadata_id" :selected-station="selectedStation" v-if="showDataset && selectedStation" />
 
     <v-card flat class="text-center" v-if="!selectedStation">
       <StationList :features="features" :map="map" />
     </v-card>
     <v-card flat class="text-center" v-else>
-      <MsgStationStatus :features="features" :map="map" />
+      <MsgStationStatus :features="features" :map="map" :metadata_id="metadata_id"/>
       <v-btn variant="outlined" size="small" color="#014e9e" @click.stop="toggleDataset" class="my-auto">
           {{ $t("navigation.data") }}
           <v-icon end icon="mdi-chart-scatter-plot" />
@@ -50,7 +50,7 @@ export default defineComponent({
       type: Object,
       required: true,
     },
-    topic: {
+    metadata_id: {
       type: String,
       required: true
     }

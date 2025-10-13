@@ -30,6 +30,7 @@
     "how_to_link_station": "Please associate stations with this dataset/topic to see their data displayed on the map",
     "from": "from",
     "no_of_observations": "Observations from the past 24 hours",
+    "no_of_files_published": "Files published from the past 24 hours",
     "does_not_exist": "Page not found",
     "no_discovery_datasets": "Discovery Metadata contains no datasets",
     "no_messages": "No messages found",

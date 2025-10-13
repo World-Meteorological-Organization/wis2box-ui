@@ -5,7 +5,7 @@
     <v-container>
       <v-row>
       <v-col cols="12">
-        <v-table>
+        <v-table v-if="messages.length > 0">
         <tbody>
           <tr>
             <th><b>data time UTC</b></th>
@@ -49,7 +49,7 @@ export default defineComponent({
       type: Object as PropType<Feature>,
       required: true,
     },
-    topic: {
+    metadata_id: {
       type: String,
       required: true,
     },
@@ -65,26 +65,16 @@ export default defineComponent({
     }
   },
   watch: {
-    selectedStation: {
-      handler() {
-        // Reset state when station changes
-        this.internalDataURL = null;
-        this.selected_id = "";
-      },
-      immediate: false
-    },
-    messages: {
-      handler() {
-        // Always reset state first
-        this.internalDataURL = null;
-        this.selected_id = "";
-        if (this.messages.length > 0) {
-          this.updateSelectedMessage(this.messages[0]);
-        } else {
-          console.log("No messages available");
-        }
-      },
-      immediate: true
+    messages: function () {
+      // Always reset state first
+      this.internalDataURL = null;
+      this.selected_id = "";
+      console.log("Number of messages available:", this.messages.length);
+      if (this.messages.length > 0) {
+        this.updateSelectedMessage(this.messages[0]);
+      } else {
+        console.log("No messages available");
+      }
     }
   },
   async mounted() {

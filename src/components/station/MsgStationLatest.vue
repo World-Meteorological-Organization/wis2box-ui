@@ -52,6 +52,10 @@ export default defineComponent({
       type: Object as PropType<Feature>,
       required: true,
     },
+    metadata_id: {
+      type: String,
+      required: true, 
+    }
   },
   mounted() {
     this.fetchData();
@@ -77,9 +81,13 @@ export default defineComponent({
     async loadMessages(station: Feature) {
       this.loading = true;
       try {
-        const response = await fetchWithToken(
-          `${window.VUE_APP_OAPI}/collections/messages/items?f=json&sortby=-datetime&wigos_station_identifier=${station.id}&limit=1`
-        );
+        const url = `${window.VUE_APP_OAPI}/collections/messages/items?` + new URLSearchParams({
+          q: this.metadata_id.replace("urn:wmo:md:", ""),
+          wigos_station_identifier: this.selectedStation.id,
+          limit: "1",
+          sortby: "-datetime"
+        });
+        const response = await fetchWithToken(url);
         const data: ItemsResponse = await response.json();
         if (data.features.length > 0) {
           const latest = data.features[0];

@@ -3,7 +3,7 @@
   <div class="text-center">
     <v-row justify="center" fill-height no-gutters>
       <v-col :cols="smAndDown ? 12 : 4" :order="smAndDown ? 'last' : 'start'" v-if="map !== undefined">
-        <TempStationInfo :topic="topic" :features="features" :map="map" class="ma-1" />
+        <TempStationInfo :metadata_id="metadata_id" :features="features" :map="map" class="ma-1" />
       </v-col>
       <v-col :cols="smAndDown ? 12 : 8">
         <v-card class="ma-1" :height="$vuetify.display.height - 232">
@@ -15,7 +15,7 @@
             <l-tile-layer :url="url" :attribution="attribution" />
             <l-control position="bottomleft">
               <v-card width="124px" class="legend pa-2" border="1">
-                <strong>{{ $t("messages.no_of_observations") }}</strong>
+                <strong>{{ $t("messages.no_of_files_published") }}</strong>
                 <v-divider class="my-2" />
                 <v-row no-gutters justify="center" v-for="(item, i) in legend" :key="i">
                   <v-col cols="3">
@@ -62,7 +62,7 @@ export default defineComponent({
       legend: [
         { color: LegendColors.Green, range: "2 or more" },
         { color: LegendColors.Yellow, range: "1" },
-        { color: LegendColors.Red, range: "0" }
+        { color: LegendColors.Gray, range: "0" }
       ],
     };
   },
@@ -71,7 +71,7 @@ export default defineComponent({
       type: Object as PropType<ItemsResponse>,
       required: true
     },
-    topic: {
+    metadata_id: {
       type: String,
       required: true
     }
@@ -97,7 +97,7 @@ export default defineComponent({
 
       if (!this.features.features || !this.features.features.length) {
           this.loading = false;
-          return catchAndDisplayError(`${this.topic} ${t("messages.no_observations_in_collection")}\n${t("messages.how_to_link_station")}`);
+          return catchAndDisplayError(`${this.metadata_id} ${t("messages.no_observations_in_collection")}\n${t("messages.how_to_link_station")}`);
         }
 
       await nextTick();

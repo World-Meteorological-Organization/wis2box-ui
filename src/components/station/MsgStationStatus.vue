@@ -12,7 +12,7 @@
     <v-divider />
     <v-window v-model="tab">
       <v-window-item :value="0" eager v-if="selectedStation">
-        <MsgStationLatest :selectedStation="selectedStation" />
+        <MsgStationLatest :selectedStation="selectedStation" :metadata_id="metadata_id"/>
       </v-window-item>
     </v-window>
     <div class="text-center ma-2">
@@ -70,6 +70,10 @@ export default defineComponent({
       type: Object,
       required: true,
     },
+    metadata_id: {
+      type: String,
+      required: true, 
+    }
   }
 });
 </script>

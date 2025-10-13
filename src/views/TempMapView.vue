@@ -8,7 +8,7 @@
     </div>
 
     <div v-if="features">
-      <TempWisMap :topic="topic" :features="features" v-if="featuresReady" />
+      <TempWisMap :metadata_id="metadata_id" :features="features" v-if="featuresReady" />
     </div>
   </v-card>
 </template>
@@ -26,7 +26,7 @@ export default defineComponent({
     TempWisMap,
   },
   props: {
-    topic: {
+    metadata_id: {
       type: String,
       required: true,
     },
@@ -44,7 +44,7 @@ export default defineComponent({
         `${window.VUE_APP_OAPI}/processes/station-msg-info/execution`,
         {
           method: 'POST',
-          body: JSON.stringify({ inputs: { collection: this.topic } }),
+          body: JSON.stringify({ inputs: { collection: this.metadata_id } }),
         },
       )
       if (response.ok) {

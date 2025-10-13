@@ -24,16 +24,10 @@ const routes = [
     component: ChartDialog,
   },
     {
-    path: '/fixed-upper-air-map/:topic',
+    path: '/fixed-upper-air-map/:metadata_id',
     props: true,
     name: 'Temp Map',
     component: TempMapView,
-  },
-  {
-    path: '/fixed-upper-air-map/:topic/data',
-    props: true,
-    name: 'Temp Data',
-    component: TempChartDialog,
   },
   {
     path: '/',
