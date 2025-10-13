@@ -31,7 +31,9 @@
     "from": "从",
     "no_of_observations": "过去24小时的观测",
     "does_not_exist": "页面不存在",
-    "no_discovery_datasets": "发现元数据不包含数据集"
+    "no_discovery_datasets": "发现元数据不包含数据集",
+    "no_messages": "未找到消息",
+    "latest": "最新数据"
   },
   "station": {
     "map": "站点地图",

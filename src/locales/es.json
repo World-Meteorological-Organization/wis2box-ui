@@ -31,8 +31,9 @@
     "from": "desde",
     "no_of_observations": "Observaciones de las últimas 24 horas",
     "does_not_exist": "Página no encontrada",
-    "no_discovery_datasets": "Los metadatos de descubrimiento no contienen conjuntos de datos"
-
+    "no_discovery_datasets": "Los metadatos de descubrimiento no contienen conjuntos de datos",
+    "no_messages": "No se encontraron mensajes",
+    "latest": "Datos más recientes"
   },
   "station": {
     "map": "Mapa de la estación",
