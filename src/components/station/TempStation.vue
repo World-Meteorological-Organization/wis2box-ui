@@ -105,8 +105,8 @@ export default defineComponent({
       let color;
       const hits = feature.properties.num_obs;
       if (hits === 0 || hits === undefined) {
-        fillColor = LegendColors.Red;
-        color = "#801A00";
+        fillColor = LegendColors.Gray;
+        color = "#4D4D4D";
       } else if (hits <= 1) {
         fillColor = LegendColors.Yellow;
         color = "#804D00";
