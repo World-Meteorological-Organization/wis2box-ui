@@ -82,5 +82,6 @@ git push --tags
 - [@vue/cli-plugin/eslint](https://cli.vuejs.org/core-plugins/eslint.html)
 
 ## Contact
-
+- [Maaike Limper](https://github.com/maaikelimper)
+- [Ben Webb](https://github.com/webb-ben)
 - [Tom Kralidis](https://github.com/tomkralidis)
