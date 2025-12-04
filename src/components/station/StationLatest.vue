@@ -93,7 +93,6 @@ export default defineComponent({
         catchAndDisplayError(String(error));
       } finally {
         this.loading = false;
-        console.log("done");
       }
     },
     async loadRecentObservations(station: Feature, limit: number) {

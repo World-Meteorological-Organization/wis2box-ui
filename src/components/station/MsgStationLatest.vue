@@ -91,7 +91,6 @@ export default defineComponent({
         const data: ItemsResponse = await response.json();
         if (data.features.length > 0) {
           const latest = data.features[0];
-          console.log("Latest message for station", station.id, latest);
           this.latest_datetime = latest.properties.datetime || null;
           this.latest_pubtime = latest.properties.pubtime || null;
           // get the first link with rel="canonical" or rel="update"

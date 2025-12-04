@@ -21,6 +21,12 @@
           </tr>
         </tbody>
         </v-table>
+        <div v-if="messages.length != 0">
+          <i>Showing last {{ messages.length }} files published</i>
+        </div>
+        <div v-else>
+          <i>Found 0 files published for this station.</i>
+        </div>
       </v-col>
       </v-row>
     </v-container>
@@ -69,7 +75,6 @@ export default defineComponent({
       // Always reset state first
       this.internalDataURL = null;
       this.selected_id = "";
-      console.log("Number of messages available:", this.messages.length);
       if (this.messages.length > 0) {
         this.updateSelectedMessage(this.messages[0]);
       } else {
@@ -109,7 +114,6 @@ export default defineComponent({
     updateSelectedMessage(message: Feature) {
       this.internalDataURL = null;
       this.selected_id = message.id;
-      console.log("Selected message ID:", this.selected_id);
       // loop over links in message to find the one with rel="canonical" or rel="update"
       const dataLink = message.links.find(link => link.rel === "canonical" || link.rel === "update");
       if (dataLink) {
@@ -118,7 +122,6 @@ export default defineComponent({
         this.internalDataURL = null;  
         console.warn("No data link found in message:", message);
       }
-      console.log("Data URL set to:", this.internalDataURL);
     },  
   },
 });

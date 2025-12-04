@@ -169,7 +169,7 @@ export interface MetadataResponse {
 
 // Superset of Feature, with additional helper fields for easier use in the frontend
 export interface Dataset extends DiscoveryMetadata {
-  hasSynop: boolean
+  mapType: string
   id: string
   bbox: number[]
   // links in a format that can be used by the wis2box UI

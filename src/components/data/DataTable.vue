@@ -141,7 +141,6 @@ export default defineComponent({
 
       try {
         const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&reportId=${this.selectedDatastream.reportId}&wigos_station_identifier=${this.selectedStation.id}&sortby=-reportTime`
-        console.log(url)
         const response = await fetchAllOAFFeatures(url);
         const data: ItemsResponse = await response.json();
         this.plot(response.url);
@@ -158,7 +157,6 @@ export default defineComponent({
         catchAndDisplayError(String(error));
       } finally {
         this.loading = false;
-        console.log("done");
       }
     },
     plot(url: string) {

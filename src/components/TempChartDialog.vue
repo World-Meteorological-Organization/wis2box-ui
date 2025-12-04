@@ -70,13 +70,13 @@ export default defineComponent({
       return "N/A";
     },
     async fetchMessages() {
-      // fetch the last 20 messages for the selected station
+      // fetch the last 10 messages for the selected station
       this.loading = true;
       try {
         const url = `${window.VUE_APP_OAPI}/collections/messages/items?` + new URLSearchParams({
           q: this.metadata_id.replace("urn:wmo:md:", ""),
           wigos_station_identifier: this.selectedStation.id,
-          limit: "20",
+          limit: "10",
           sortby: "-datetime"
         });
         const response = await fetchWithToken(url);

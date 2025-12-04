@@ -57,7 +57,6 @@ export default defineComponent({
       // load data from the provided URL
       this.loading = true;
       try {
-          console.log("Decoding BUFR data from URL:", this.data_url);
           const response = await fetch(`${window.VUE_APP_OAPI}/processes/bufr2UpperAirChart/execution`, {
             method: "POST",
             headers: {
