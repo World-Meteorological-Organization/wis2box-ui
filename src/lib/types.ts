@@ -10,8 +10,9 @@ export enum LegendColors {
 interface Links {
   type: string
   rel: string
-  title: string
+  title?: string
   href: string
+  length?: number
 }
 
 // Trace represents data that is used for plotting the history, plotting the datastream as timeseries
@@ -63,8 +64,21 @@ export interface Feature {
     units?: string
     value?: number
     wigos_station_identifier?: string
+
+    // Message GeoJSON
+    datetime?: string
+    pubtime?: string
   }
   links: Links[]
+}
+
+// Represent the Link object from pygeoapi
+export interface Link {
+  href: string
+  rel: string
+  type: string
+  title?: string
+  length?: number
 }
 
 // Represents the JSON response from the OAFeat endpoint ${oapi}/collections/${wmo-urn}/items
@@ -155,7 +169,7 @@ export interface MetadataResponse {
 
 // Superset of Feature, with additional helper fields for easier use in the frontend
 export interface Dataset extends DiscoveryMetadata {
-  hasSynop: boolean
+  mapType: string
   id: string
   bbox: number[]
   // links in a format that can be used by the wis2box UI

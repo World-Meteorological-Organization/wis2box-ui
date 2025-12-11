@@ -30,8 +30,11 @@
     "how_to_link_station": "Veuillez associer les stations à cet ensemble de données/sujet pour voir leurs données affichées sur la carte",
     "from": "depuis",
     "no_of_observations": "Observations des dernières 24 heures",
+    "no_of_files_published": "Fichiers publiés au cours des dernières 24 heures",
     "does_not_exist": "Page non trouvée",
-    "no_discovery_datasets": "Les métadonnées de découverte ne contiennent pas d'ensembles de données"
+    "no_discovery_datasets": "Les métadonnées de découverte ne contiennent pas d'ensembles de données",
+    "no_messages": "Aucun message trouvé",
+    "latest": "Données les plus récentes"
   },
   "station": {
     "map": "Plan de la station",

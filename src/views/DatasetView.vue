@@ -11,8 +11,8 @@
       <v-col sm="12" md="3">
         <v-container>
           <v-row justify="center" fill-height>
-            <template v-if="dataset.hasSynop">
-              <v-card class="pa-0 ma-0" @click="loadMap(dataset.id)" @keydown.enter="loadMap(dataset.id)"
+            <template v-if="dataset.mapType != 'unknown'">
+              <v-card class="pa-0 ma-0" @click="loadMap(dataset.id, dataset.mapType)" @keydown.enter="loadMap(dataset.id, dataset.mapType)"
                 aria-label="Dataset map">
                 <v-overlay open-on-hover contained activator="parent" class="align-center justify-center">
                   <v-btn flat>
@@ -97,7 +97,7 @@ export default defineComponent({
   methods: {
     async loadDatasets() {
       this.loading = true;
-      const url = `${window.VUE_APP_OAPI}/collections/discovery-metadata/items`;
+      const url = `${window.VUE_APP_OAPI}/collections/discovery-metadata/items?sortby=-updated`;
       let response;
       try {
         response = await fetchWithToken(url);
@@ -111,20 +111,26 @@ export default defineComponent({
 
       try {
         const data: MetadataResponse = await response.json();
-
         if (data.numberMatched === 0) {
           const errMsg = `${t("messages.no_discovery_datasets")}`;
           return catchAndDisplayError(errMsg);
         }
 
         for (const feature of data.features) {
-
           // if "wmo:topicHierarchy" not is available in the properties hasSynop should be false
+          let mapType = "unknown";
           let hasSynop = false;
+          let hasTemp = false;
           let hasTopic = false;
           if (feature.properties["wmo:topicHierarchy"]) {
             hasTopic = true;
             hasSynop = feature.properties["wmo:topicHierarchy"].includes("surface-based-observations/synop");
+            hasTemp = feature.properties["wmo:topicHierarchy"].includes("surface-based-observations/temp");
+            if (hasSynop) {
+              mapType = "synop";
+            } else if (hasTemp) {
+              mapType = "temp";
+            }
           }
           const uiLinks = [];
 
@@ -132,6 +138,15 @@ export default defineComponent({
             uiLinks.push({
               href: undefined,
               target: `/fixed-land-station-map/${feature.id}`,
+              type: "Map",
+              msg: "explore",
+              icon: "mdi-map-marker-circle",
+            });
+          }
+          if (hasTemp) {
+            uiLinks.push({
+              href: undefined,
+              target: `/fixed-upper-air-map/${feature.id}`,
               type: "Map",
               msg: "explore",
               icon: "mdi-map-marker-circle",
@@ -185,7 +200,7 @@ export default defineComponent({
           const bbox = feature.geometry.coordinates[0].flat(2);
 
           this.datasets.push({
-            hasSynop,
+            mapType,
             bbox,
             uiLinks,
             ...feature,
@@ -197,8 +212,12 @@ export default defineComponent({
         this.loading = false;
       }
     },
-    loadMap(topic: string) {
-      this.$router.push(`/fixed-land-station-map/${topic}`);
+    loadMap(topic: string, mapType: string) {
+      if (mapType === "synop") {
+        this.$router.push(`/fixed-land-station-map/${topic}`);
+      } else if (mapType === "temp") {
+        this.$router.push(`/fixed-upper-air-map/${topic}`);
+      }
     },
   },
 });
