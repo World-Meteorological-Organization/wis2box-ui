@@ -1,13 +1,24 @@
 <template id="datasets">
   <v-progress-linear v-if="loading" indeterminate color="primary" />
 
-  <v-card flat v-if="!loading" class="pa-2">
+  <v-card flat v-if="!loading" class="pa-2 w-100">
 
-    <v-alert class="py-2 mb-2 text-center" border="start" variant="text" color="#014e9e">
-      <h2>{{ $t("messages.welcome") }}</h2>
+    <v-alert class="py-1 mb-1 text-center" border="start" variant="text" color="#014e9e">
+      <v-row>
+        <v-col cols="6">
+          <h2>{{ $t("messages.welcome") }}</h2>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+          v-model="filterQuery"
+          label="Filter datasets by"
+          outlined
+          clearable
+          />
+        </v-col>
+      </v-row>
     </v-alert>
-
-    <v-row v-for="(dataset, index) in datasets" :key="index">
+    <v-row v-for="(dataset, index) in datasets_shown" :key="index">
       <v-col sm="12" md="3">
         <v-container>
           <v-row justify="center" fill-height>
@@ -87,6 +98,8 @@ export default defineComponent({
   },
   data() {
     return {
+      filterQuery: '',
+      datasets_shown: [] as Dataset[],
       datasets: [] as Dataset[],
       loading: true,
     };
@@ -94,10 +107,25 @@ export default defineComponent({
   mounted() {
     this.loadDatasets();
   },
+  watch: {
+    filterQuery() {
+      // filter the datasets based on filterQuery
+      const query = this.filterQuery.toLowerCase();
+      if (query === '' || query === '%') {
+        this.datasets_shown = this.datasets;
+      } else {
+        this.datasets_shown = this.datasets.filter(dataset => {
+          return dataset.properties.title.toLowerCase().includes(query) ||
+                 dataset.properties.id.toLowerCase().includes(query) ||
+                 (dataset.properties['wmo:topicHierarchy'] && dataset.properties['wmo:topicHierarchy'].toLowerCase().includes(query));
+        });
+      }
+    },
+  },
   methods: {
     async loadDatasets() {
       this.loading = true;
-      const url = `${window.VUE_APP_OAPI}/collections/discovery-metadata/items?sortby=-updated`;
+      const url = `${window.VUE_APP_OAPI}/collections/discovery-metadata/items`;
       let response;
       try {
         response = await fetchWithToken(url);
@@ -191,7 +219,7 @@ export default defineComponent({
           if(hasTopic) {
             uiLinks.push({
               target: undefined,
-              href: `${window.VUE_APP_OAPI}/collections/messages/items?metadata_id=${feature.id}`,
+              href: `${window.VUE_APP_OAPI}/collections/messages/items?metadata_id=${feature.id}&sortby=-datetime`,
               type: "Info",
               msg: "messages",
               icon: "mdi-message-text-outline",
@@ -205,6 +233,7 @@ export default defineComponent({
             uiLinks,
             ...feature,
           });
+          this.datasets_shown = this.datasets;
         }
       } catch (error) {
         catchAndDisplayError(String(error));
