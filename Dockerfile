@@ -19,7 +19,7 @@ RUN npm run build && \
 FROM nginx
 
 # Create a non-root user and group
-RUN addgroup --system wis2box-ui && adduser --system --ingroup wis2box-ui wis2box-ui
+RUN groupadd --system wis2box-ui && useradd --system --gid wis2box-ui wis2box-ui
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=ui-builder /tmp/app/dist /usr/share/nginx/html
