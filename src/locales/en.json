@@ -72,6 +72,7 @@
     "map": "Map",
     "explore": "Explore",
     "mqp": "PubSub",
-    "metadata_id": "Metadata Identifier"
+    "metadata_id": "Metadata Identifier",
+    "filter_datasets": "Filter datasets by"
   }
 }

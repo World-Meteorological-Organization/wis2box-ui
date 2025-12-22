@@ -72,6 +72,7 @@
     "map": "",
     "explore": "",
     "mqp": "",
-    "metadata_id": ""
+    "metadata_id": "",
+    "filter_datasets": ""
   }
 }

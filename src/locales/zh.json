@@ -72,7 +72,8 @@
     "map": "地图",
     "explore": "探索",
     "mqp": "PubSub",
-    "metadata_id": "元数据标识符"
+    "metadata_id": "元数据标识符",
+    "filter_datasets": "按以下条件筛选数据集"
   }
 }
   

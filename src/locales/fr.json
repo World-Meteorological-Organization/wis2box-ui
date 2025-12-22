@@ -72,6 +72,7 @@
     "map": "Carte",
     "explore": "Explorer",
     "mqp": "PubSub",
-    "metadata_id": "Identifiant des métadonnées"
+    "metadata_id": "Identifiant des métadonnées",
+    "filter_datasets": "Filtrer les ensembles de données par"
   }
 }
