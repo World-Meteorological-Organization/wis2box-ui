@@ -32,6 +32,17 @@ RUN chmod +x /docker-entrypoint.d/entrypoint.sh
 # Change ownership of files to the non-root user
 RUN chown -R wis2box-ui:wis2box-ui /usr/share/nginx/html /docker-entrypoint.d
 
+# Create nginx runtime directories and fix permissions
+RUN mkdir -p \
+    /var/cache/nginx \
+    /var/cache/nginx/client_temp \
+    /var/cache/nginx/proxy_temp \
+    /var/cache/nginx/fastcgi_temp \
+    /var/cache/nginx/uwsgi_temp \
+    /var/cache/nginx/scgi_temp \
+    /var/run \
+ && chown -R wis2box-ui:wis2box-ui /var/cache/nginx /var/run
+
 # Switch to the non-root user
 USER wis2box-ui
 
