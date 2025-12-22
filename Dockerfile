@@ -18,6 +18,12 @@ RUN npm run build && \
 
 FROM nginx
 
+# Security updates
+RUN apt-get update \
+ && apt-get upgrade -y \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 # Create a non-root user and group
 RUN groupadd --system wis2box-ui && useradd --system --gid wis2box-ui wis2box-ui
 
@@ -40,8 +46,7 @@ RUN mkdir -p \
     /var/cache/nginx/fastcgi_temp \
     /var/cache/nginx/uwsgi_temp \
     /var/cache/nginx/scgi_temp \
-    /var/run \
- && chown -R wis2box-ui:wis2box-ui /var/cache/nginx /var/run
+ && chown -R wis2box-ui:wis2box-ui /var/cache/nginx
 
 # Switch to the non-root user
 USER wis2box-ui
