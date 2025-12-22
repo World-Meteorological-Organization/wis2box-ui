@@ -11,7 +11,7 @@
         <v-col cols="6">
           <v-text-field
           v-model="filterQuery"
-          label="{{ $t('datasets.filter_datasets') }}"
+          :label="$t('datasets.filter_datasets')"
           outlined
           clearable
           />
