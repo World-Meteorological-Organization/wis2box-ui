@@ -74,7 +74,8 @@ export default defineComponent({
       this.loading = true;
       try {
         const url = `${window.VUE_APP_OAPI}/collections/messages/items?` + new URLSearchParams({
-          q: this.metadata_id.replace("urn:wmo:md:", ""),
+          metadata_id: this.metadata_id,
+          q: "canonical",
           wigos_station_identifier: this.selectedStation.id,
           limit: "10",
           sortby: "-datetime"
