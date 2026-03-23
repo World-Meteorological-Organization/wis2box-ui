@@ -25,7 +25,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "start-backend-proxy": "lcp --proxyUrl http://136.156.130.194"
+    "start-backend-proxy": "lcp --proxyUrl http://136.156.129.171"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
