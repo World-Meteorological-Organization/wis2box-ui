@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted, nextTick } from "vue";
+import { defineProps, ref, onMounted, nextTick, watch } from "vue";
 import type { Dataset } from "@/lib/types";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
 import L, { type PointTuple } from "leaflet";
 
 const props = defineProps<{ dataset: Dataset }>();
-
+const mapRef = ref<L.Map | null>(null);
 const loading = ref(true);
 const url = window.VUE_APP_BASEMAP_URL;
 const zoom = 1; 
-const geoJsonRef = ref<typeof LGeoJson | null>(null); // Ref to the LGeoJson component
 
 onMounted(async () => {
   loading.value = true;
@@ -18,37 +17,48 @@ onMounted(async () => {
   loading.value = false;
 });
 
-const onMapReady = (map: L.Map) => {
-  if (props.dataset.geometry) {
-    const geoJsonLayer = L.geoJSON(props.dataset.geometry); 
-    geoJsonLayer.addTo(map); 
+const updateMapBounds = () => {
+  if (!mapRef.value || !props.dataset?.geometry) return;
 
-    const bounds = geoJsonLayer.getBounds();
-    if (bounds.isValid()) {
-      const padding: PointTuple = [3, 3];
-      map.fitBounds(bounds, { padding }); 
-    }
-    
-    // Make the map static so it just shows the bbox
-    // If the user wants to interact with the map, they should click into the WisMap component
-    map.attributionControl.remove();
-    map.zoomControl.remove();
-    map.invalidateSize();
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
+  const geoJsonLayer = L.geoJSON(props.dataset.geometry);
+  const bounds = geoJsonLayer.getBounds();
 
-    // this is needed to handle the case where the bounds stretch to the end of the map
-    // for instance for the bbox of the entire northern hemisphere.
-    // without this, there may be gray borders at the edge of the map
-    map.setMaxBounds([
-    [ -90, -180 ],
-    [ 90, 180 ]    
-  ]);
-
+  if (bounds.isValid()) {
+    const padding: PointTuple = [3, 3];
+    mapRef.value.fitBounds(bounds, { padding });
   }
+
+  if (mapRef.value.attributionControl) {
+    mapRef.value.attributionControl.remove();
+  }
+  if (mapRef.value.zoomControl) {
+    mapRef.value.zoomControl.remove();
+  }
+  mapRef.value.invalidateSize();
+  mapRef.value.dragging.disable();
+  mapRef.value.touchZoom.disable();
+  mapRef.value.doubleClickZoom.disable();
+  mapRef.value.scrollWheelZoom.disable();
+  mapRef.value.setMaxBounds([
+    [-90, -180],
+    [90, 180]
+  ]);
 };
+
+const onMapReady = (map: L.Map) => {
+  mapRef.value = map;
+  updateMapBounds();
+};
+
+watch(
+  () => props.dataset?.geometry,
+  async () => {
+    await nextTick();
+    updateMapBounds();
+  },
+  { deep: true }
+);
+
 </script>
 
 <template>
@@ -64,6 +74,6 @@ const onMapReady = (map: L.Map) => {
   >
     <LTileLayer :url="url" />
     
-    <LGeoJson ref="geoJsonRef" :geojson="props.dataset.geometry" />
+    <LGeoJson :geojson="props.dataset.geometry" />
   </LMap>
 </template>
