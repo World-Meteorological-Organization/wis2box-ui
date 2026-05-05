@@ -1,5 +1,6 @@
 import type { Feature, ItemsResponse } from './types'
 import { useGlobalStateStore } from '@/stores/global'
+import { t } from "@/locales/i18n"
 
 // create an enum for green, yellow, red, and gray as hex
 export enum ObservationLevel {
@@ -20,9 +21,9 @@ export function getNameTime(name: string, phenomenonTime: string) {
     const hourDifference = Math.floor(timeDifference / (1000 * 3600))
 
     if (hourDifference > 0) {
-      cleanedName = `${cleanedName} (${hourDifference} hr)`
+      cleanedName = `${cleanedName} (${hourDifference} ${t('time.hr')})`
     } else if (minuteDifference > 0) {
-      cleanedName = `${cleanedName} (${minuteDifference} min)`
+      cleanedName = `${cleanedName} (${minuteDifference} ${t('time.min')})`
     }
   }
 
@@ -52,7 +53,12 @@ export function clean(word: string | null | undefined) {
     word = word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
   }
 
-  return word.replace(/_/g, ' ') // replace all instances of _ with a space
+  const nameTranslation = `parameters.${word.toLowerCase().replace(/ /g, '_')}`;
+  if (!t(nameTranslation).startsWith('parameters.')) {
+    return t(nameTranslation);
+  } else {
+    return word.replace(/_/g, ' ') // replace all instances of _ with a space
+  }
 }
 
 export function hasLinks(feature: Feature) {

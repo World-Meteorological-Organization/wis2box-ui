@@ -74,5 +74,25 @@
     "mqp": "PubSub",
     "metadata_id": "Идентификатор метаданных",
     "filter_datasets": "Фильтровать наборы данных по"
+  },
+  "time": {
+    "hr": "ч",
+    "min": "мин"
+  },
+  "parameters": {
+    "air_temperature": "Температура воздуха",
+    "dewpoint_temperature": "Температура точки росы",
+    "maximum_wind_gust_direction": "Направление максимального порыва ветра",
+    "maximum_wind_gust_speed": "Скорость максимального порыва ветра",
+    "non_coordinate_geopotential_height": "Некорректированная геопотенциальная высота",
+    "non_coordinate_pressure": "Некорректированное давление",
+    "precipitation_intensity_high_accuracy": "Интенсивность осадков высокой точности",
+    "pressure_reduced_to_mean_sea_level": "Давление, приведенное к среднему уровню моря",
+    "relative_humidity": "Относительная влажность",
+    "state_of_ground": "Состояние поверхности",
+    "total_precipitation_or_total_water_equivalent": "Общие осадки или эквивалент общего объема воды",
+    "total_snow_depth": "Общая глубина снега",
+    "wind_direction": "Направление ветра",
+    "wind_speed": "Скорость ветра"
   }
 }

@@ -2,14 +2,14 @@
   <v-progress-linear v-if="loading" indeterminate color="primary" />
 
   <v-card flat v-if="!loading" class="pa-2 w-100">
-
-    <v-alert class="py-1 mb-1 text-center" border="start" variant="text" color="#014e9e">
-      <v-row>
+    <v-alert class="ma-1 pa-1 text-center" variant="text" color="#014e9e">
+      <v-row align="center">
         <v-col cols="6">
           <h2>{{ $t("messages.welcome") }}</h2>
         </v-col>
         <v-col cols="6">
           <v-text-field
+          class="pt-4"
           v-model="filterQuery"
           :label="$t('datasets.filter_datasets')"
           outlined

@@ -74,6 +74,26 @@
     "mqp": "PubSub",
     "metadata_id": "元数据标识符",
     "filter_datasets": "按以下条件筛选数据集"
+  },
+  "time": {
+    "hr": "小时",
+    "min": "分钟"
+  },
+  "parameters": {
+    "air_temperature": "空气温度",
+    "dewpoint_temperature": "露点温度",
+    "maximum_wind_gust_direction": "最大风速方向",
+    "maximum_wind_gust_speed": "最大风速",
+    "non_coordinate_geopotential_height": "非坐标地势高度",
+    "non_coordinate_pressure": "非坐标压力",
+    "precipitation_intensity_high_accuracy": "高精度降水强度",
+    "pressure_reduced_to_mean_sea_level": "减至平均海平面压力",
+    "relative_humidity": "相对湿度",
+    "state_of_ground": "地面状态",
+    "total_precipitation_or_total_water_equivalent": "总降水量或总水当量",
+    "total_snow_depth": "总雪深",
+    "wind_direction": "风向",
+    "wind_speed": "风速"
   }
 }
   

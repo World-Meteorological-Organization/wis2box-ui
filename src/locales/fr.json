@@ -74,5 +74,25 @@
     "mqp": "PubSub",
     "metadata_id": "Identifiant des métadonnées",
     "filter_datasets": "Filtrer les ensembles de données par"
+  },
+  "time": {
+    "hr": "hr",
+    "min": "min"
+  },
+  "parameters": {
+    "air_temperature": "Température de l'air",
+    "dewpoint_temperature": "Température du point de rosée",
+    "maximum_wind_gust_direction": "Direction de la rafale de vent maximale",
+    "maximum_wind_gust_speed": "Vitesse de la rafale de vent maximale",
+    "non_coordinate_geopotential_height": "Hauteur géopotentielle non coordonnée",
+    "non_coordinate_pressure": "Pression non coordonnée",
+    "precipitation_intensity_high_accuracy": "Intensité des précipitations haute précision",
+    "pressure_reduced_to_mean_sea_level": "Pression réduite au niveau de la mer",
+    "relative_humidity": "Humidité relative",
+    "state_of_ground": "État du sol",
+    "total_precipitation_or_total_water_equivalent": "Précipitation totale ou équivalent en eau total",
+    "total_snow_depth": "Profondeur totale de la neige",
+    "wind_direction": "Direction du vent",
+    "wind_speed": "Vitesse du vent"
   }
 }

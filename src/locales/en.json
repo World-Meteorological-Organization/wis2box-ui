@@ -74,5 +74,25 @@
     "mqp": "PubSub",
     "metadata_id": "Metadata Identifier",
     "filter_datasets": "Filter datasets by"
+  },
+  "time": {
+    "hr": "hr",
+    "min": "min"
+  },  
+  "parameters": {
+    "air_temperature": "Air temperature",
+    "dewpoint_temperature": "Dewpoint temperature",
+    "maximum_wind_gust_direction": "Maximum wind gust direction",
+    "maximum_wind_gust_speed": "Maximum wind gust speed",
+    "non_coordinate_geopotential_height": "Non coordinate geopotential height",
+    "non_coordinate_pressure": "Non coordinate pressure",
+    "precipitation_intensity_high_accuracy": "Precipitation intensity high accuracy",
+    "pressure_reduced_to_mean_sea_level": "Pressure reduced to mean sea level",
+    "relative_humidity": "Relative humidity",
+    "state_of_ground": "State of ground",
+    "total_precipitation_or_total_water_equivalent": "Total precipitation or total water equivalent",
+    "total_snow_depth": "Total snow depth",
+    "wind_direction": "Wind direction",
+    "wind_speed": "Wind speed"
   }
 }
