@@ -18,7 +18,7 @@
               <i class="dot" :style="`background: ${getColor(s)}`" />
             </template>
             <h4 class="ml-1 text-left" v-text="clean(s.properties.name)" />
-            <template v-slot:append>
+            <template v-slot:append v-if="s.properties.url">
               <v-list-item-action>
               <v-btn variant="outlined" size="small" color="#014e9e" :target="s.id" :title="s.id"
                 :href="s.properties.url">
