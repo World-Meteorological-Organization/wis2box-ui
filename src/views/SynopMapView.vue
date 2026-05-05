@@ -1,13 +1,8 @@
 <template>
-  <v-progress-linear v-if="!featuresReady" striped indeterminate color="primary" />
   <v-card flat class="pa-2" width="100%">
+    <v-progress-linear v-if="!featuresReady" striped indeterminate color="primary" />
 
-    <div v-show="!featuresReady" style="height: 10px;">
-          <!-- For some reason, the v-progress-linear will not show up
-         unless there is a dummy div in the template. -->
-    </div>
-
-    <div v-if="features">
+    <div>
       <SynopWisMap :topic="topic" :features="features" v-if="featuresReady" />
     </div>
   </v-card>

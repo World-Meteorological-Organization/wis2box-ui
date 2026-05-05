@@ -1,9 +1,8 @@
 <template id="datasets">
-  <v-progress-linear v-if="loading" indeterminate color="primary" />
+  <v-card flat class="pa-2" width="100%">
+    <v-progress-linear v-if="loading" indeterminate color="primary" />
 
-  <v-card flat v-if="!loading" class="pa-2 w-100">
-
-    <v-alert class="py-1 mb-1 text-center" border="start" variant="text" color="#014e9e">
+    <v-alert class="text-center" variant="text" color="#014e9e">
       <v-row>
         <v-col cols="6">
           <h2>{{ $t("messages.welcome") }}</h2>
@@ -18,6 +17,7 @@
         </v-col>
       </v-row>
     </v-alert>
+
     <v-row v-for="(dataset, index) in datasets_shown" :key="index">
       <v-col sm="12" md="3">
         <v-container>
