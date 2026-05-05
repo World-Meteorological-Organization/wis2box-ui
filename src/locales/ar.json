@@ -74,5 +74,25 @@
     "mqp": "PubSub",
     "metadata_id": "معرّف البيانات الوصفية",
     "filter_datasets": "تصفية مجموعات البيانات حسب"
+  },
+  "time": {
+    "hr": "ساعة",
+    "min": "دقيقة"
+  },
+  "parameters": {
+    "air_temperature": "درجة حرارة الهواء",
+    "dewpoint_temperature": "درجة حرارة نقطة الندى",
+    "maximum_wind_gust_direction": "اتجاه أقصى رياح",
+    "maximum_wind_gust_speed": "سرعة أقصى رياح",
+    "non_coordinate_geopotential_height": "ارتفاع جيوبوتينسيال غير منسق",
+    "non_coordinate_pressure": "ضغط غير منسق",
+    "precipitation_intensity_high_accuracy": "شدة هطول الأمطار عالية الدقة",
+    "pressure_reduced_to_mean_sea_level": "ضغط مخفض إلى مستوى سطح البحر",
+    "relative_humidity": "رطوبة نسبية",
+    "state_of_ground": "حالة الأرض",
+    "total_precipitation_or_total_water_equivalent": "إجمالي هطول الأمطار أو ما يعادله من المياه",
+    "total_snow_depth": "إجمالي عمق الثلوج",
+    "wind_direction": "اتجاه الرياح",
+    "wind_speed": "سرعة الرياح"
   }
 }
