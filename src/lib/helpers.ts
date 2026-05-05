@@ -54,8 +54,8 @@ export function clean(word: string | null | undefined) {
   }
 
   const nameTranslation = `parameters.${word.toLowerCase().replace(/ /g, '_')}`;
-  if (!t(nameTranslation).startsWith('parameters.')) {
-    return t(nameTranslation);
+  if (!t(nameTranslation as any).startsWith('parameters.')) {
+    return t(nameTranslation as any);
   } else {
     return word.replace(/_/g, ' ') // replace all instances of _ with a space
   }
