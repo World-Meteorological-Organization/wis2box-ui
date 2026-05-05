@@ -16,14 +16,16 @@
           <v-list-item v-bind="props" :class="{ 'on-hover': isHovering }" @click="onClick(s)" @mouseover="onHover(s)">
             <template v-slot:prepend>
               <i class="dot" :style="`background: ${getColor(s)}`" />
-              <h4 class="ml-1 text-left" v-text="clean(s.properties.name)" />
             </template>
+            <h4 class="ml-1 text-left" v-text="clean(s.properties.name)" />
             <template v-slot:append>
+              <v-list-item-action>
               <v-btn variant="outlined" size="small" color="#014e9e" :target="s.id" :title="s.id"
                 :href="s.properties.url">
                 OSCAR
                 <v-icon end icon="mdi-open-in-new" />
               </v-btn>
+              </v-list-item-action>
             </template>
           </v-list-item>
           <v-divider v-if="i + 1 < filteredStations.length" />
