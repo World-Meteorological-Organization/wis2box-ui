@@ -142,7 +142,7 @@ export default defineComponent({
       this.data = [];
       this.loading = true;
       try {
-        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&wigos_station_identifier=${this.selectedStation.id}&sortby=reportTime`;
+        const url = `${window.VUE_APP_OAPI}/collections/${this.topic}/items?f=json&name=${this.selectedDatastream.name}&limit=1000&wigos_station_identifier=${this.selectedStation.id}&sortby=-reportTime`;
 
         let response
         try {
